@@ -1,0 +1,57 @@
+.search-item-container {
+    width: calc((100% / 3) - 30px);
+    overflow: hidden;
+    gap: 8px;
+    padding: 12px;
+    background-color: rgb(229, 229, 229);
+    font-size: 14px;
+    position: relative;
+    
+
+    img {
+        border-radius: 4px;
+    }
+
+    .search-item-info {
+        flex-direction: column;
+        gap: 8px;
+      
+
+        .search-item-track {
+            font-weight: 500;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+            overflow: hidden;
+        }
+
+        .search-item-artist, .search-item-album {
+            color: rgb(123, 123, 123);
+            font-size: 12px;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+            overflow: hidden;
+        }
+    }
+
+    .play-pause-button{ 
+        position: absolute;
+        right : 12px;
+        cursor: pointer;
+    }
+}
+
+@media only screen and (max-width : 768px) {
+    .search-item-container {
+        width: calc(50% - 30px) ;
+    
+    }
+}
+
+@media only screen and (max-width : 540px) {
+    .search-item-container {
+        width: calc(100%) ;
+    
+    }
+}

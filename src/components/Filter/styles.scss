@@ -1,0 +1,44 @@
+.filter-container {
+    max-width: 800px;
+    width: 100%;
+    margin: 20px auto 0;
+    height: 24px;
+    gap : 12px;
+
+
+    .explicit-container {
+        gap : 16px;
+
+        label {
+            display: flex;
+            gap : 8px;
+            align-items: center;
+        }
+    }
+
+    .clear {
+        width: 1px;
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+    }
+
+    .amount {
+        display: flex;
+        gap : 8px;
+
+        input {
+            width: 50px;
+            border:1px solid rgb(213, 213, 213);
+            text-align: center;
+            outline : none;
+        }
+    }
+}
+
+@media only screen and (max-width : 768px) {
+    .filter-container {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+}
