@@ -8,7 +8,7 @@ import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Result from "./pages/Result";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSearchResult, setAmount, setIsExplicit, setKeyword, setPlayId } from "./features/SearchSlice";
+import { getSearchResult, setAmount, setIsExplicit, setIsSearch, setKeyword, setPlayId } from "./features/SearchSlice";
 import Loading from "./components/Loading";
 import Filter from "./components/Filter";
 
@@ -37,6 +37,7 @@ function App() {
     dispatch(setKeyword(keyword.replace(/%20/g, " "))) 
     dispatch(setAmount(amount || 15))
     dispatch(getSearchResult(keyword))
+    dispatch(setIsSearch(true)) 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 

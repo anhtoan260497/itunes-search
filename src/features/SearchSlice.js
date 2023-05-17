@@ -9,19 +9,22 @@ const initialState = {
   price: 100,
   amount: 15,
   isSearch: false,
-  playId : ''
+  playId: "",
+  isError: false,
 };
 
 export const getSearchResult = createAsyncThunk(
   "SearchSlice/getSearchResult",
-  async (params,thunkAPI) => {
-    const currentState = thunkAPI.getState().searchResult
-    const {keyword,isExplicit,price,amount} = currentState
+  async (params, thunkAPI) => {
+    const currentState = thunkAPI.getState().searchResult;
+    const { keyword, isExplicit, price, amount } = currentState;
     try {
-      const res = await searchAPI.search({keyword,isExplicit,amount});
-      return res.data.results.filter(item => item.trackPrice < price);
+      const res = await searchAPI.search({ keyword, isExplicit, amount });
+      console.log(res);
+      return res.data.results.filter((item) => item.trackPrice < price);
     } catch (err) {
       console.log(err);
+      throw err;
     }
   }
 );
@@ -42,26 +45,32 @@ export const SearchSlice = createSlice({
     setAmount: (state, action) => {
       state.amount = action.payload;
     },
-    setPlayId : (state,action) => {
-      state.playId = action.payload
+    setPlayId: (state, action) => {
+      state.playId = action.payload;
+    },
+    setIsSearch:(state,action) => {
+      state.isSearch = action.payload
     }
   },
   extraReducers: (builder) => {
     builder.addCase(getSearchResult.pending, (state) => {
+      state.isError = false;
       state.isLoading = true;
     });
     builder.addCase(getSearchResult.rejected, (state) => {
+      state.result = [];
       state.isLoading = false;
-      console.log("error");
+      state.isError = true;
     });
     builder.addCase(getSearchResult.fulfilled, (state, action) => {
       state.isLoading = false;
+      console.log(action.payload);
       state.result = action.payload;
       state.isSearch = true;
     });
   },
 });
 
-export const { setKeyword, setIsExplicit, setPrice, setAmount,setPlayId } =
+export const { setKeyword, setIsExplicit, setPrice, setAmount, setPlayId, setIsSearch } =
   SearchSlice.actions;
 export default SearchSlice;
